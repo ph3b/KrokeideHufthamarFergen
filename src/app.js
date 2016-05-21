@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var app = express();
-var port = process.env.PORT;
+var port = process.env.PORT || process.env.port;
 
 // Set up express app
 var HandleMessageController = require('./Routes/HandleMessageController');
