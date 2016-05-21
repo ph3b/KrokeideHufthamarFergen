@@ -7,6 +7,10 @@ var port = process.env.PORT || process.env.port;
 var HandleMessageController = require('./Routes/HandleMessageController');
 app.use(bodyParser.json())
 
+app.get('/', function(req, res){
+	res.send("MOM, IM ON A CLOUD!")
+})
+
 app.get('/webhooks', function(req, res){
 	if(req.query['hub.verify_token'] === "muchsecret"){
 		res.send(req.query['hub.challenge'])
