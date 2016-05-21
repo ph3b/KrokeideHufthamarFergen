@@ -8,7 +8,7 @@ var HandleMessageController = require('./Routes/HandleMessageController');
 app.use(bodyParser.json())
 
 app.get('/', function(req, res){
-	res.send("MOM, IM ON A CLOUD!")
+	res.status(200).send("MOM, IM ON A CLOUD!")
 })
 
 app.get('/webhooks', function(req, res){
