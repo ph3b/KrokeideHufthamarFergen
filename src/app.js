@@ -21,13 +21,16 @@ app.get('/webhooks', function(req, res){
 
 app.post('/webhooks', (req, res) => {
 		let event = Message.parseMessage(req);
-		Message.sendMessageTo(event.sender, starwars())
-		.then(() => {
+		if(event.sender && event.text){
+			Message.sendMessageTo(event.sender, starwars())
+			.then(() => {
+				res.sendStatus(200)
+			})
+			.catch((error) => {
+			})
+		} else {
 			res.sendStatus(200)
-		})
-		.catch((error) => {
-			res.sendStatus(200)
-		})
+		}
 })
 
 module.exports = {
