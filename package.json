@@ -2,10 +2,10 @@
   "name": "austevollfergen",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/app.js",
+  "main": "./src/Server.js",
   "scripts": {
-    "start": "node ./src/app.js",
-    "local": "PORT=7777 node ./src/app.js",
+    "start": "node ./src/Server.js",
+    "local": "PORT=7777 node ./src/Server.js",
     "test": "./node_modules/mocha/bin/mocha ./tests --recursive --watch"
   },
   "engines": {
@@ -20,7 +20,11 @@
     "expect.js": "^0.3.1",
     "express.js": "^1.0.0",
     "mocha": "^2.4.5",
+    "node-fetch": "^1.5.2",
     "sinon": "^1.17.4",
     "starwars": "^1.0.0"
+  },
+  "devDependencies": {
+    "supertest": "^1.2.0"
   }
 }
