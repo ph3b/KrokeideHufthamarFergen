@@ -3,9 +3,6 @@ var bodyParser = require('body-parser')
 var app = express();
 var starwars = require('starwars')
 app.use(bodyParser.json())
-// Set up express app
-
-var HandleMessageController = require('./Routes/HandleMessageController');
 var Message = require('./Controllers/Message')
 
 app.get('/', function(req, res){
