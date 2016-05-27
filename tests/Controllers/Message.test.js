@@ -1,6 +1,6 @@
 const message = require('../../src/Controllers/Message');
 const expect = require('expect.js')
-const mockPayload = require('../MockFacebookMessagePayload.json')
+const mockPayload = require('../MockData/MockFacebookMessagePayload.json')
 const sinon = require('sinon');
 const axios = require('axios');
 
@@ -33,7 +33,7 @@ describe('Message Controller', () => {
           ]}
       }
 
-    let actual = message.parseMessage(request)
+    let actual = message.parseFacebookMessage(request)
     let expected = { sender: "USER_ID", text: "hello" }
     expect(actual).to.be.eql(expected)
   })

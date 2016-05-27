@@ -1,7 +1,7 @@
 const axios = require('axios')
 const app_token = "EAASB2AZAcnz4BAKHQBEV3yJ5cmwSZBkCuEwJbJP2M6VqCumxlR84hvn8pNDsvH0EnCXq4ChZCr2FPDwuSvXyESTLeBWHTPZBcrrKTZAO14J4sX7Iwul7Yofce31ykpWT3GSAmswLR0ltPdVJxhk8HamSD6vC3RAlMxhEIBcZByHQZDZD"
 
-exports.parseMessage = function parseMessage(req){
+exports.parseFacebookMessage = function parseMessage(req){
   messaging_events = req.body.entry[0].messaging;
   for (i = 0; i < messaging_events.length; i++) {
     event = req.body.entry[0].messaging[i];

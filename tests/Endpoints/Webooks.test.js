@@ -19,7 +19,7 @@ describe('Webhooks API endpoints', function(){
   })
 
   it('Should respond with 200', () => {
-    const mockRequest = require('../MockFacebookMessagePayload.json').body
+    const mockRequest = require('../MockData/MockFacebookMessagePayload.json').body
     const axiosStub = sinon.stub(axios, 'post', () => {
       return Promise.resolve()
     })
@@ -34,14 +34,14 @@ describe('Webhooks API endpoints', function(){
     .then(function(res) {
       const actualArgument1 = axiosStub.getCall(0).args[1]
       expect(actualArgument1.recipient.id).to.be.eql("USER_ID")
-      expect(actualArgument1.message.text).to.a('string')
+      expect(actualArgument1.message.text).to.be.a('string')
       expect(res.status).to.be.eql(200)
       axiosStub.restore();
     })
   })
 
   it('Should respond with 200 and the sent hub.challenge', () => {
-    const mockRequest = require('../MockFacebookMessagePayload.json').body
+    const mockRequest = require('../MockData/MockFacebookMessagePayload.json').body
     return axios.get(apiUrl + '/webhooks?hub.verify_token=muchsecret&hub.challenge=12345')
     .then(function(res) {
       expect(res.data).to.be.eql(12345)

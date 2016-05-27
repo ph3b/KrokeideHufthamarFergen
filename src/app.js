@@ -19,7 +19,7 @@ app.get('/webhooks', (req, res) => {
 })
 
 app.post('/webhooks', (req, res, next) => {
-	let event = Message.parseMessage(req);
+	let event = Message.parseFacebookMessage(req);
 	if(event.sender && event.text){
 		const randomStarwarsQuote = starwars()
 		Message.sendMessageTo(event.sender, randomStarwarsQuote)
