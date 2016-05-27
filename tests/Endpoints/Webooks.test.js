@@ -40,17 +40,11 @@ describe('Webhooks API endpoints', function(){
     })
   })
 
-  it('Should respond with 200', () => {
+  it('Should respond with 200 and the sent hub.challenge', () => {
     const mockRequest = require('../MockFacebookMessagePayload.json').body
-    return fetch(apiUrl + '/webhooks?hub.verify_token=mathias&hub.challenge=challenge', {
-      headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-      },
-      method: 'GET',
-    })
+    return axios.get(apiUrl + '/webhooks?hub.verify_token=muchsecret&hub.challenge=IAMCHALLENGE')
     .then(function(res) {
-
+      expect(res.data).to.be.eql("IAMCHALLENGE")
     })
   })
 })

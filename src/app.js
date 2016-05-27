@@ -11,11 +11,11 @@ app.use(restify.gzipResponse());
 app.get('/', (req, res) => res.status(200, "MOM, IM ON A CLOUD!"))
 
 app.get('/webhooks', (req, res) => {
-	console.log(req.query)
-	if(req.query['hub.verify_token'] === "muchsecret"){
-		res.send(req.query['hub.challenge'])
+	if(req.query.hub.verify_token === "muchsecret"){
+		res.send(200, req.query.hub.challenge)
+	} else {
+		res.send(200, 'Error, wrong validation token')
 	}
-	res.send('Error, wrong validation token')
 })
 
 app.post('/webhooks', (req, res, next) => {
