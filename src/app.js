@@ -12,7 +12,7 @@ app.get('/', (req, res) => res.status(200, "MOM, IM ON A CLOUD!"))
 
 app.get('/webhooks', (req, res) => {
 	if(req.query.hub.verify_token === "muchsecret"){
-		res.send(200, req.query.hub.challenge)
+		res.send(200, parseInt(req.query.hub.challenge))
 	} else {
 		res.send(200, 'Error, wrong validation token')
 	}

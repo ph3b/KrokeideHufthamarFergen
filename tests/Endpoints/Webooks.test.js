@@ -42,9 +42,9 @@ describe('Webhooks API endpoints', function(){
 
   it('Should respond with 200 and the sent hub.challenge', () => {
     const mockRequest = require('../MockFacebookMessagePayload.json').body
-    return axios.get(apiUrl + '/webhooks?hub.verify_token=muchsecret&hub.challenge=IAMCHALLENGE')
+    return axios.get(apiUrl + '/webhooks?hub.verify_token=muchsecret&hub.challenge=12345')
     .then(function(res) {
-      expect(res.data).to.be.eql("IAMCHALLENGE")
+      expect(res.data).to.be.eql(12345)
     })
   })
 })
