@@ -9,23 +9,17 @@ function checkFerryLocation(ferryLocation){
 
 function getWeekTimesFrom(ferryLocation){
   checkFerryLocation(ferryLocation)
-  let dates = ferryData[ferryLocation]["week"];
-  dates = dates.map(formatDate)
-  return dates
+  return ferryData[ferryLocation]["week"].map(formatDate)
 }
 
 function getSaturdayTimesFrom(ferryLocation){
   checkFerryLocation(ferryLocation)
-  let dates = ferryData[ferryLocation]["saturday"];
-  dates = dates.map(formatDate)
-  return dates;
+  return ferryData[ferryLocation]["saturday"].map(formatDate)
 }
 
 function getSundayTimesFrom(ferryLocation){
   checkFerryLocation(ferryLocation)
-  let dates = ferryData[ferryLocation]["sunday"];
-  dates = dates.map(formatDate)
-  return dates;
+  return ferryData[ferryLocation]["sunday"].map(formatDate)
 }
 
 function formatDate(dateString){
@@ -63,6 +57,8 @@ function getNNextFerriesFrom(ferryLocation, date, n){
   date = date || new Date()
   let ferryTimesForDay = getTimesFor(ferryLocation, date)
   let nextFerryTimes = ferryTimesForDay.map((ferryTime) => {
+    // Parse the dates and add a date
+    // attribute with a JS date object of the time.
     let ferryTimeString = ferryTime.time
     let hours = parseInt(ferryTimeString.split(":")[0])
     let minutes = parseInt(ferryTimeString.split(":")[1])
@@ -72,8 +68,10 @@ function getNNextFerriesFrom(ferryLocation, date, n){
     ferryTime.date = ferryDateTime
     return ferryTime
   }).filter(ferryTime => {
+    // Only keep times that are later than date.
     return ferryTime.date.getTime() > date.getTime()
   }).sort((a, b) => {
+    // Sort the dates with the earliest first.
     return a.date.getTime() - b.date.getTime()
   })
   if(n > 1){

@@ -16,6 +16,5 @@ describe('FerryMan', () => {
     const expected = "Neste ferge går til hufthamar fra krokeide klokken 14:10";
     expect(actual).to.be.eql(expected)
   })
-
-
+  
 })
