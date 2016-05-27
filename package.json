@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./src/Server.js",
     "local": "PORT=7777 node ./src/Server.js",
-    "test": "./node_modules/mocha/bin/mocha ./tests --recursive --watch"
+    "test": "./node_modules/mocha/bin/mocha ./tests --recursive",
+    "local-test": "./node_modules/mocha/bin/mocha ./tests --recursive --watch"
   },
   "engines": {
     "node": "6.1.0"
