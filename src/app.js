@@ -11,6 +11,7 @@ app.use(restify.gzipResponse());
 app.get('/', (req, res) => res.status(200, "MOM, IM ON A CLOUD!"))
 
 app.get('/webhooks', (req, res) => {
+	console.log(req.query)
 	if(req.query['hub.verify_token'] === "muchsecret"){
 		res.send(req.query['hub.challenge'])
 	}
