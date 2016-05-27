@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src/Server.js",
   "scripts": {
-    "start": "node ./src/Server.js",
+    "start": "pm2 start ./src/Server.js --name=api",
     "local": "PORT=7777 node ./src/Server.js",
     "test": "./node_modules/mocha/bin/mocha ./tests --recursive --watch"
   },
@@ -19,6 +19,7 @@
     "expect.js": "^0.3.1",
     "mocha": "^2.4.5",
     "node-fetch": "^1.5.2",
+    "pm2": "^1.1.3",
     "restify": "^4.1.0",
     "sinon": "^1.17.4",
     "starwars": "^1.0.0"
