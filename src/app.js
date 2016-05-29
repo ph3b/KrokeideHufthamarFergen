@@ -3,7 +3,7 @@ const starwars = require('starwars')
 const app = restify.createServer();
 const Message = require('./Controllers/Message')
 const FerryMan = require('./Controllers/FerryMan')
-var time = require('time')(Date);
+process.env.TZ = "Europe/Oslo"
 
 app.use(restify.acceptParser(app.acceptable));
 app.use(restify.bodyParser())
