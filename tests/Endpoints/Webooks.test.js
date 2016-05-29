@@ -19,7 +19,7 @@ describe('Webhooks API endpoints', function(){
   })
 
   it('Should respond with 200', () => {
-    const mockRequest = require('../MockData/MockFacebookMessagePayload.json').body
+    const mockRequest = require('../MockData/UserRequest.json').body
     const axiosStub = sinon.stub(axios, 'post', () => {
       return Promise.resolve()
     })

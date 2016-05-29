@@ -2,7 +2,6 @@ var FerryController = require('./FerryController');
 var MessageParser = require('./MessageParser')
 
 function askForTime(message, date){
-  console.log("This ran")
   let startLocation = MessageParser.getStartLocation(message)
   let endLocation = MessageParser.getEndLocation(message)
   let direction = MessageParser.getDirection(message)

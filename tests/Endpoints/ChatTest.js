@@ -18,7 +18,7 @@ describe('Webhooks Chat endpoints', function(){
     })
   })
 
-  it.only('Should respond with 200', () => {
+  it('Should respond with 200', () => {
     const mockRequest = require('../MockData/UserRequest.json').body
     const axiosStub = sinon.stub(axios, 'post', () => {
       return Promise.resolve()
