@@ -26,11 +26,15 @@ function getStartLocation(message){
     if(direction === "fra") return location;
     if(direction === "til") return locations.find(loc => loc !== location)
   }
+  return null
 }
 
 function getEndLocation(message){
   let startLocation = getStartLocation(message)
-  return locations.find(dir => dir !== startLocation)
+  if(startLocation){
+    return locations.find(dir => dir !== startLocation)
+  }
+  return null;
 }
 
 exports.getLocation = getLocation;

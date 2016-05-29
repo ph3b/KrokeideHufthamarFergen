@@ -22,4 +22,11 @@ describe('FerryMan', () => {
     expect(actual).to.be.eql(expected)
   })
 
+  it('Should say that it doesnt understand the question', () => {
+    const monday = convertToMomentTime(new Date(2016, 04, 23, 14, 0))
+    const actual = FerryMan.askForTime("Du er en dritt.", monday)
+    const expected = "Jeg forstår ikke hva du mener!";
+    expect(actual).to.be.eql(expected)
+  })
+
 })
