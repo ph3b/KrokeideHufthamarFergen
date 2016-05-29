@@ -32,10 +32,10 @@ describe('Webhooks Chat endpoints', function(){
       body: JSON.stringify(mockRequest)
     })
     .then(function(res) {
-      //const actualArgument1 = axiosStub.getCall(0).args[1]
-      //expect(actualArgument1.recipient.id).to.be.eql("USER_ID")
-      //expect(actualArgument1.message.text).to.a('string')
-      //expect(res.status).to.be.eql(200)
+      const actualArgument1 = axiosStub.getCall(0).args[1]
+      expect(actualArgument1.recipient.id).to.be.eql("USER_ID")
+      expect(actualArgument1.message.text).to.a('string')
+      expect(res.status).to.be.eql(200)
       axiosStub.restore();
     })
   })
