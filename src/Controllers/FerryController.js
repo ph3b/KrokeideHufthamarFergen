@@ -1,5 +1,5 @@
 var ferryData = require('./FerryData.json');
-var moment = require('moment')
+var moment = require('moment-timezone')
 
 function checkFerryLocation(ferryLocation){
   if(ferryLocation !== "krokeide" && ferryLocation !== "hufthamar"){
@@ -27,13 +27,18 @@ function formatDate(dateString){
   let hours = dateComponents[0]
   let minutes = dateComponents[1]
   let alternativeFerry = dateComponents[2] === "*" ? true : false;
-  return { time: `${hours}:${minutes}`, alternativeFerry }
+  let ferryDateTime = moment.tz(new Date(), "Europe/Oslo")
+  ferryDateTime.hours(hours)
+  ferryDateTime.minutes(minutes)
+  ferryDateTime.seconds(0)
+  ferryDateTime.milliseconds(0)
+  return { alternativeFerry, date: ferryDateTime, time: dateToString(ferryDateTime)}
 }
 
 function getTimesFor(ferryLocation, date){
   checkFerryLocation(ferryLocation)
   date = date || new Date(); // Default date is today.
-  const dayOfTheWeek = date.getDay()
+  const dayOfTheWeek = date.day()
   if(dayOfTheWeek > 0 && dayOfTheWeek < 6){
     return getWeekTimesFrom(ferryLocation)
   }
@@ -47,8 +52,8 @@ function getTimesFor(ferryLocation, date){
 }
 
 function dateToString(date){
-  let hours = (date.getHours() < 10) ? "0" + date.getHours() : date.getHours()
-  let minutes = (date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes()
+  let hours = (date.hours() < 10) ? "0" + date.hours() : date.hours()
+  let minutes = (date.minutes() < 10) ? "0" + date.minutes() : date.minutes()
   return `${hours}:${minutes}`
 }
 
@@ -56,23 +61,16 @@ function getNNextFerriesFrom(ferryLocation, date, n){
   checkFerryLocation(ferryLocation)
   date = date || new Date()
   let ferryTimesForDay = getTimesFor(ferryLocation, date)
-  let nextFerryTimes = ferryTimesForDay.map((ferryTime) => {
-    // Parse the dates and add a date
-    // attribute with a JS date object of the time.
-    let ferryTimeString = ferryTime.time
-    let hours = parseInt(ferryTimeString.split(":")[0])
-    let minutes = parseInt(ferryTimeString.split(":")[1])
-    let ferryDateTime = new Date(date.getTime())
-    ferryDateTime.setHours(hours)
-    ferryDateTime.setMinutes(minutes)
-    ferryTime.date = ferryDateTime
-    return ferryTime
-  }).filter(ferryTime => {
+  let nextFerryTimes = ferryTimesForDay.filter(ferryTime => {
     // Only keep times that are later than date.
-    return ferryTime.date.getTime() > date.getTime()
+    let adjustedDate = moment.tz(ferryTime.date, "Europe/Oslo")
+    adjustedDate.year(date.year())
+    adjustedDate.month(date.month())
+    adjustedDate.date(date.date())
+    return adjustedDate.valueOf()  > date.valueOf()
   }).sort((a, b) => {
     // Sort the dates with the earliest first.
-    return a.date.getTime() - b.date.getTime()
+    return a.date.valueOf() - b.date.valueOf()
   })
   if(n > 1){
     let timesArray = [];
