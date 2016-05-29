@@ -22,8 +22,10 @@ app.get('/webhooks', (req, res) => {
 app.post('/webhooks', (req, res, next) => {
 	let event = Message.parseFacebookMessage(req);
 	if(event.sender && event.text){
+		console.log("Message: " + event.text)
 		const randomStarwarsQuote = starwars()
 		const ferryManAnswer = AskFerryMan.askForTime(event.text)
+		console.log(ferryManAnswer)
 		Message.sendMessageTo(event.sender, ferryManAnswer)
 		.then(() => {
 			res.send(200, null)
