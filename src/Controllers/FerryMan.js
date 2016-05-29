@@ -2,6 +2,7 @@ var FerryController = require('./FerryController');
 var MessageParser = require('./MessageParser')
 
 function askForTime(message, date){
+  console.log("This ran")
   let startLocation = MessageParser.getStartLocation(message)
   let endLocation = MessageParser.getEndLocation(message)
   let direction = MessageParser.getDirection(message)
@@ -14,7 +15,6 @@ function askForTime(message, date){
   if(direction === "til"){
     answer = `Neste ferge går til ${endLocation} fra ${startLocation} klokken ${nextFerryTime.time}`;
   }
-
   return answer;
 }
 

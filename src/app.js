@@ -2,7 +2,7 @@ const restify = require('restify')
 const starwars = require('starwars')
 const app = restify.createServer();
 const Message = require('./Controllers/Message')
-const AskFerryMan = require('./Controllers/FerryController')
+const FerryMan = require('./Controllers/FerryMan')
 
 app.use(restify.acceptParser(app.acceptable));
 app.use(restify.bodyParser())
@@ -22,10 +22,8 @@ app.get('/webhooks', (req, res) => {
 app.post('/webhooks', (req, res, next) => {
 	let event = Message.parseFacebookMessage(req);
 	if(event.sender && event.text){
-		console.log("Message: " + event.text)
 		const randomStarwarsQuote = starwars()
-		const ferryManAnswer = AskFerryMan.askForTime(event.text)
-		console.log(ferryManAnswer)
+		const ferryManAnswer = FerryMan.askForTime(event.text, new Date())
 		Message.sendMessageTo(event.sender, ferryManAnswer)
 		.then(() => {
 			res.send(200, null)
