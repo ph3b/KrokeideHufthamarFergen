@@ -1,5 +1,5 @@
 const axios = require('axios')
-const app_token = "EAASB2AZAcnz4BAKHQBEV3yJ5cmwSZBkCuEwJbJP2M6VqCumxlR84hvn8pNDsvH0EnCXq4ChZCr2FPDwuSvXyESTLeBWHTPZBcrrKTZAO14J4sX7Iwul7Yofce31ykpWT3GSAmswLR0ltPdVJxhk8HamSD6vC3RAlMxhEIBcZByHQZDZD"
+const app_token = "EAASB2AZAcnz4BABeLVukfkXnKYGAZCLfsIhsOXnz3oa34EwVT82DvqpQjGhIP4rQijOatRa2FDT1dnhJi186QqwDcmeZAKCmySMUyE97AMPmHkc5lXhU9FLhoa1bDvsMxyYZAeYzTuIPtnpMbiOiZBlV2ltTf8ZBboMGYjCIUMfgZDZD"
 
 exports.parseFacebookMessage = function parseMessage(req){
   messaging_events = req.body.entry[0].messaging;
@@ -24,6 +24,8 @@ exports.sendMessageTo = function sendMessageTo(recipient, text){
   			message: messageData,
   		})
   		.then(res => {
+            console.log('FB API response ')
+            console.log(res);
   			resolve()
   	})
     .catch(error => {

@@ -30,13 +30,15 @@ app.post('/webhooks', (req, res, next) => {
 	if(event.sender && event.text){
 		const randomStarwarsQuote = starwars()
 		const ferryManAnswer = FerryMan.askForTime(event.text, convertToMomentTime(new Date()))
+        console.log('Message: ', event.text);
+        console.log('Answer: ', ferryManAnswer);
 		Message.sendMessageTo(event.sender, ferryManAnswer)
-		.then(() => {
-			res.send(200, null)
-		})
-		.catch((error) => {
-			console.log(error)
-		})
+    		.then(() => {
+    			res.send(200, null)
+    		})
+    		.catch((error) => {
+    			console.log(error)
+    		})
 	} else {
 		res.send(200, null)
 	}
