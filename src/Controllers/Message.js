@@ -24,8 +24,6 @@ exports.sendMessageTo = function sendMessageTo(recipient, text){
   			message: messageData,
   		})
   		.then(res => {
-            console.log('FB API response ')
-            console.log(res);
   			resolve()
   	})
     .catch(error => {
